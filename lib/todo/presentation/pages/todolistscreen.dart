@@ -22,7 +22,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
       appBar: AppBar(
         title: const Text('Todo List'),
       ),
-      body: SafeArea(child: _buildTodoList()),
+      body: SafeArea(child: _buildTodoList(context)),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context,
@@ -37,7 +37,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
     );
   }
 
-  Widget _buildTodoList() {
+  Widget _buildTodoList(BuildContext context) {
     return StreamBuilder(
       stream: _taskServices.getTasks(),
       builder: (builder, snapshot) {
@@ -61,6 +61,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 10),
@@ -71,11 +72,12 @@ class _TodoListScreenState extends State<TodoListScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Expanded(
+              Flexible(
+                fit: FlexFit.tight,
                 child: ListView.builder(
                   itemCount: notCompletedTasks.length,
                   itemBuilder: (builder, index) {
-                    return _buildTodoItem(notCompletedTasks[index]);
+                    return _buildTodoItem(notCompletedTasks[index], context);
                   },
                 ),
               ),
@@ -87,11 +89,11 @@ class _TodoListScreenState extends State<TodoListScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Expanded(
+              Flexible(
                 child: ListView.builder(
                   itemCount: completedTasks.length,
                   itemBuilder: (builder, index) {
-                    return _buildTodoItem(completedTasks[index]);
+                    return _buildTodoItem(completedTasks[index], context);
                   },
                 ),
               ),
@@ -102,42 +104,46 @@ class _TodoListScreenState extends State<TodoListScreen> {
     );
   }
 
-  Widget _buildTodoItem(DocumentSnapshot doc) {
+  Widget _buildTodoItem(DocumentSnapshot doc, BuildContext context) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (builder) => TaskViewer(
-                      title: data['title'],
-                      description: data['description'],
-                      formattedDate: data['timestamp'],
-                      completed: data['completed'],
-                    )));
-      },
-      child: Container(
-        height: 70,
-        margin: const EdgeInsets.all(10),
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.grey.withOpacity(0.3),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              data['title'],
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              data['description'],
-              style: const TextStyle(fontSize: 15),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
+    return SizedBox(
+      height: 90,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (builder) => TaskViewer(
+                        title: data['title'],
+                        description: data['description'],
+                        formattedDate: data['timestamp'],
+                        completed: data['completed'],
+                      )));
+        },
+        child: Container(
+          height: 70,
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.grey.withOpacity(0.3),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                data['title'],
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              Text(
+                data['description'],
+                style: const TextStyle(fontSize: 15),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
         ),
       ),
     );
