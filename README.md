@@ -27,3 +27,9 @@ To get a local copy up and running follow these simple steps.
 - Flutter SDK
 - Dart SDK
 - Android Studio or VS Code
+
+### Screenshots
+![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")  
+![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")  
+![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")  
+
