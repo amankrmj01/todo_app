@@ -18,18 +18,8 @@ This is a simple Todo application built with Flutter and Firebase. This project 
 - Java
 - Gradle
 
-## Getting Started
-
-To get a local copy up and running follow these simple steps.
-
-### Prerequisites
-
-- Flutter SDK
-- Dart SDK
-- Android Studio or VS Code
 
 ### Screenshots
-![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")  
-![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")  
-![Alt text](/relative/path/to/img.jpg?raw=true "Optional Title")  
+<img src="assets/screenshots/Screenshot_20240529_071052.jpg" alt="Sign IN page" width="200" height="auto" /> <img src="assets/screenshots/Screenshot_20240529_071100.jpg" alt="Sign up page" width="200" height="auto" /> <img src="assets/screenshots/Screenshot_20240529_071310.jpg" alt="Home Screen" width="200" height="auto" /> <img src="assets/screenshots/Screenshot_20240529_071316.jpg" alt="Add Task" width="200" height="auto" /> <img src="assets/screenshots/Screenshot_20240529_071323.jpg" alt="Sign IN page" width="200" height="auto" />
+
 
